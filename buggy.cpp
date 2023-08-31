@@ -3,26 +3,29 @@
 // FIXME: Add appropriate declarative regions to scope and other header files.
 // EXPLAIN: Why are these required?
 struct Point {
-    int x, y, z;
+    int x, y;
 
-    Point () : x(), y() {}
-    Point (int _x, int _y) : x(_x), y(_y) {}
+    Point () : x(), y() {} //default constructor to initialize our variables
+    Point (int _x, int _y) : x(_x), y(_y) {} //constructor to initialize our variables to their respected values
 };
 
 class Shape {
     int vertices;
     Point** points;
-
+public:
 // FIXME: Add appropriate access modifiers.
 // EXPLAIN: Why should we add the access modifier?
-    Shape (int _vertices) {
-        vertices = _vertices;
-        points = new Point*[vertices+1];
+    Shape (int _vertices) : vertices(_vertices){
+        points = new Point*[vertices];
     }
 
     //FIXME: Fill out the destructor.
     //EXPLAIN: Why should we fill destructors? What will happen if the destroyer is left empty?
     ~Shape () {
+        for(int i = 0; i < vertices; i++) {
+            delete points[i];
+        }
+        delete[] points;
     }
 
     // FIXME
