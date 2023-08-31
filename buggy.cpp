@@ -3,7 +3,7 @@
 // FIXME: Add appropriate declarative regions to scope and other header files.
 // EXPLAIN: Why are these required?
 struct Point {
-    int x, y;
+    int x, y, z;
 
     Point () : x(), y() {}
     Point (int _x, int _y) : x(_x), y(_y) {}
