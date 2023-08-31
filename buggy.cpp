@@ -29,11 +29,12 @@ public:
     }
 
     // FIXME
-    void addPoints (/* formal parameter for unsized array called pts */) {
+    void addPoints (Point* pts) {
         for (int i = 0; i <= vertices; i++) {
             //FIXME: Add an allocation of point
             //EXPLAIN: Why should we add the allocation of point?
-            memcpy(points[i], &pts[i%vertices], sizeof(Point));
+            //memcpy(points[i], &pts[i%vertices], sizeof(Point));
+            points[i] = new Point(pts[i].x, pts[i].y);
         }
     }
 
