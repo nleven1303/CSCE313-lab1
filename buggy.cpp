@@ -25,7 +25,7 @@ class Shape {
     //EXPLAIN: Why should we fill destructors? What will happen if the destroyer is left empty?
     ~Shape () { //the destructor allocates for unwanted memory in our program
         for(int i = 0; i <= vertices; i++) {
-            delete[] points[i];
+            delete points[i];
         }
         delete[] points;
     }
@@ -86,8 +86,8 @@ int main () {
     cout << "The area of the quad is: " << quad->area() << endl;
 
     // FIXME: clean-up dynamically allocated memory to avoid memory leaks
-   delete[] tri;
-   delete[] quad;
+   delete tri;
+   delete quad;
 
    return 0;
 
