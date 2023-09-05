@@ -43,7 +43,7 @@ public:
     double* area () {
         int temp = 0;
         // FIXME
-        for (int i = 0; i <= vertices; i++) {
+        for (int i = 0; i < vertices; i++) {
             // FIXME: there are two methods to access members of pointers
             //        use one to fix lhs and the other to fix rhs
             int lhs = points[i]->x * points[i+1]->y;
@@ -63,10 +63,13 @@ int main () {
     //          tri3 = (2, 0)
 
     // adding points to tri
+    Point tri1(0,0);
+    Point tri2(1,2);
+    Point tri3(2,0);
     Point triPts[3] = {tri1, tri2, tri3};
     Shape* tri = new Shape(3);
     // FIXME
-    tri.addPoints(triPts);
+    tri->addPoints(triPts);
 
     // FIXME: create the following points using your preferred struct
     //        definition:
@@ -76,9 +79,13 @@ int main () {
     //          quad4 = (2, 0)
 
     // adding points to quad
+    Point quad1(0,0);
+    Point quad2(0,2);
+    Point quad3(2,2);
+    Point quad4(2,0);
     Point quadPts[4] = {quad1, quad2, quad3, quad4};
     Shape* quad = new Shape(4);
-    quad.addPoints(quadPts);
+    quad->addPoints(quadPts);
 
     // FIXME: print out area of triangle and area of quad
 
