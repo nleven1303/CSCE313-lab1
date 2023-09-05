@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 // FIXME: Add appropriate declarative regions to scope and other header files.
@@ -6,18 +7,16 @@ using namespace std;
 struct Point {
     int x, y;
 
-    Point () : x(), y() {} //default constructor to initialize our variables
+    Point () : x(0), y(0) {} //default constructor to initialize our variables
     Point (int _x, int _y) : x(_x), y(_y) {} //constructor to initialize our variables to their respected values
 };
 
 class Shape {
-    int vertices;
-    Point** points;
 public:
 // FIXME: Add appropriate access modifiers.
 // EXPLAIN: Why should we add the access modifier?
-    Shape (int _vertices) : vertices(_vertices){
-        points = new Point*[vertices];
+    Shape (int _vertices) : vertices(_vertices){ //the modifiers are used to control 
+        points = new Point *[vertices];          // how we can access the variables(vertices, area) and the functions
     }
 
     //FIXME: Fill out the destructor.
@@ -34,7 +33,6 @@ public:
         for (int i = 0; i <= vertices; i++) {
             //FIXME: Add an allocation of point
             //EXPLAIN: Why should we add the allocation of point?
-            //memcpy(points[i], &pts[i%vertices], sizeof(Point));
             points[i] = new Point(pts[i].x, pts[i].y);
         }
     }
@@ -46,13 +44,16 @@ public:
         for (int i = 0; i < vertices; i++) {
             // FIXME: there are two methods to access members of pointers
             //        use one to fix lhs and the other to fix rhs
-            int lhs = points[i]->x * points[i+1]->y;
-            int rhs = points[i+1]->x * points[i]->y;
+            int lhs = points[i]->x * points[(i+1) % vertices]->y;
+            int rhs = points[(i+1) % vertices]->x * points[i]->y;
             temp += (lhs - rhs);
         }
         double area = abs(temp)/2.0;
         return &area;
     }
+private:
+    int vertices;
+    Point **points;
 };
 
 int main () {
@@ -63,10 +64,7 @@ int main () {
     //          tri3 = (2, 0)
 
     // adding points to tri
-    Point tri1(0,0);
-    Point tri2(1,2);
-    Point tri3(2,0);
-    Point triPts[3] = {tri1, tri2, tri3};
+    Point triPts[3] = {Point(0,0), Point(1,2), Point(2,0)};
     Shape* tri = new Shape(3);
     // FIXME
     tri->addPoints(triPts);
@@ -79,11 +77,7 @@ int main () {
     //          quad4 = (2, 0)
 
     // adding points to quad
-    Point quad1(0,0);
-    Point quad2(0,2);
-    Point quad3(2,2);
-    Point quad4(2,0);
-    Point quadPts[4] = {quad1, quad2, quad3, quad4};
+    Point quadPts[4] = {Point(0, 0), Point(0, 2), Point(2, 2), Point(2, 0)};
     Shape* quad = new Shape(4);
     quad->addPoints(quadPts);
 
