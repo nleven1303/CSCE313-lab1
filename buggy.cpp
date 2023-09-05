@@ -22,7 +22,7 @@ public:
 
     //FIXME: Fill out the destructor.
     //EXPLAIN: Why should we fill destructors? What will happen if the destroyer is left empty?
-    ~Shape () {
+    ~Shape () { //the destructor allocates for unwanted memory in our program
         for(int i = 0; i < vertices; i++) {
             delete points[i];
         }
@@ -88,6 +88,12 @@ int main () {
     quad->addPoints(quadPts);
 
     // FIXME: print out area of triangle and area of quad
+    cout << "The area of the triangle is: " << tri->area() << endl;
+    cout << "The area of the quad is: " << quad->area() << endl;
 
     // FIXME: clean-up dynamically allocated memory to avoid memory leaks
+    delete tri;
+    delete quad;
+
+    return 0;
 }
