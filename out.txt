@@ -1,0 +1,2 @@
+The area of the triangle is: 2
+The area of the quad is: 4

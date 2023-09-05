@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cmath>
+#include <string.h>
 using namespace std;
 
 // FIXME: Add appropriate declarative regions to scope and other header files.
@@ -12,48 +12,48 @@ struct Point {
 };
 
 class Shape {
-public:
-// FIXME: Add appropriate access modifiers.
-// EXPLAIN: Why should we add the access modifier?
+    public:
+        int vertices;
+        Point **points;
+    // FIXME: Add appropriate access modifiers.
+    // EXPLAIN: Why should we add the access modifier?
     Shape (int _vertices) : vertices(_vertices){ //the modifiers are used to control 
-        points = new Point *[vertices];          // how we can access the variables(vertices, area) and the functions
+        points = new Point*[vertices+1];          // how we can access the variables(vertices, area) and the functions
     }
 
     //FIXME: Fill out the destructor.
     //EXPLAIN: Why should we fill destructors? What will happen if the destroyer is left empty?
     ~Shape () { //the destructor allocates for unwanted memory in our program
-        for(int i = 0; i < vertices; i++) {
-            delete points[i];
+        for(int i = 0; i <= vertices; i++) {
+            delete[] points[i];
         }
         delete[] points;
     }
 
     // FIXME
-    void addPoints (Point* pts) {
+    void addPoints (Point pts[]) {
         for (int i = 0; i <= vertices; i++) {
             //FIXME: Add an allocation of point
             //EXPLAIN: Why should we add the allocation of point?
-            points[i] = new Point(pts[i].x, pts[i].y);
+            points[i] = new Point();
+            memcpy(points[i], &pts[i%vertices], sizeof(Point));
         }
     }
 
     // FIXME: update the computation
-    double* area () {
+    double area () {
         int temp = 0;
         // FIXME
         for (int i = 0; i < vertices; i++) {
             // FIXME: there are two methods to access members of pointers
             //        use one to fix lhs and the other to fix rhs
-            int lhs = points[i]->x * points[(i+1) % vertices]->y;
-            int rhs = points[(i+1) % vertices]->x * points[i]->y;
+            int lhs = points[i]->x * points[(i+1)]->y;
+            int rhs = points[(i+1)]->x * points[i]->y;
             temp += (lhs - rhs);
         }
         double area = abs(temp)/2.0;
-        return &area;
+        return area;
     }
-private:
-    int vertices;
-    Point **points;
 };
 
 int main () {
@@ -86,8 +86,10 @@ int main () {
     cout << "The area of the quad is: " << quad->area() << endl;
 
     // FIXME: clean-up dynamically allocated memory to avoid memory leaks
-    delete tri;
-    delete quad;
+   delete[] tri;
+   delete[] quad;
 
-    return 0;
+   return 0;
+
+    
 }
