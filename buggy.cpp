@@ -4,6 +4,7 @@ using namespace std;
 
 // FIXME: Add appropriate declarative regions to scope and other header files.
 // EXPLAIN: Why are these required?
+// It allows us to declare a certain block like a function or struct, a class body, and other names. 
 struct Point {
     int x, y;
 
@@ -17,13 +18,16 @@ class Shape {
         Point **points;
     // FIXME: Add appropriate access modifiers.
     // EXPLAIN: Why should we add the access modifier?
-    Shape (int _vertices) : vertices(_vertices){ //the modifiers are used to control 
-        points = new Point*[vertices+1];          // how we can access the variables(vertices, area) and the functions
+    //the modifiers are used to control how we can access both public and private variables and functions
+    Shape (int _vertices) : vertices(_vertices){ 
+        points = new Point*[vertices+1];          
     }
 
-    //FIXME: Fill out the destructor.
-    //EXPLAIN: Why should we fill destructors? What will happen if the destroyer is left empty?
-    ~Shape () { //the destructor allocates for unwanted memory in our program
+    // FIXME: Fill out the destructor.
+    // EXPLAIN: Why should we fill destructors? What will happen if the destroyer is left empty?
+    // the destructor destroys unwanted memory in our program, so it's important to fill them.
+    // If the destructor is left empty, then there will be unwanted memory in our program.
+    ~Shape () { 
         for(int i = 0; i <= vertices; i++) {
             delete points[i];
         }
@@ -35,6 +39,7 @@ class Shape {
         for (int i = 0; i <= vertices; i++) {
             //FIXME: Add an allocation of point
             //EXPLAIN: Why should we add the allocation of point?
+            //we add an allocation of point to declare it as a pointer so it can store the address of the memory to be addressed later.
             points[i] = new Point();
             memcpy(points[i], &pts[i%vertices], sizeof(Point));
         }
