@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 // FIXME: Add appropriate declarative regions to scope and other header files.
 // EXPLAIN: Why are these required?
@@ -45,8 +46,8 @@ public:
         for (int i = 0; i <= vertices; i++) {
             // FIXME: there are two methods to access members of pointers
             //        use one to fix lhs and the other to fix rhs
-            int lhs = points[i].x * points[i+1].y;
-            int rhs = points[i+1].x * points[i].y;
+            int lhs = points[i]->x * points[i+1]->y;
+            int rhs = points[i+1]->x * points[i]->y;
             temp += (lhs - rhs);
         }
         double area = abs(temp)/2.0;
